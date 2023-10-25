@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+<style>
+        .error {
+            color: red;
+        }
+        body {
+    background-color: lightgray;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form id="registrationForm" action="#" method="post" onsubmit="return validateForm()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <span id="usernameError" class="error"></span><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error"></span><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <span id="passwordError" class="error"></span><br><br>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <span id="confirmPasswordError" class="error"></span><br><br>
+        <label for="birthdate">Date of Birth:</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+        <span id="birthdateError" class="error"></span><br><br>
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male">Male
+        <input type="radio" id="female" name="gender" value="female">Female
+        <input type="radio" id="other" name="gender" value="other">Other
+        <span id="genderError" class="error"></span><br><br>
+        <label for="age">Age:</label>
+        <input type="age" id="age" name="age" required>
+        <span id="usernameError" class="error"></span><br><br>
+        <input type="submit" value="Register">
+    </form>
+    <script>
+        function validateForm() {
+            let valid = true;
+            // Clear previous error messages
+            clearErrors();
+            // Validation logic
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm_password").value;
+            const birthdate = document.getElementById("birthdate").value;
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (username === "") {
+                valid = false;
+                document.getElementById("usernameError").textContent = "Username is required";
+            }
+     if (email === "" || !isValidEmail(email)) {
+                valid = false;
+                document.getElementById("emailError").textContent = "Please enter a valid email address";
+            }
+            if (password === "") {
+                valid = false;
+                document.getElementById("passwordError").textContent = "Password is required";
+            }
+            if (password !== confirmPassword) {
+                valid = false;
+                document.getElementById("confirmPasswordError").textContent = "Passwords do not match";
+            }
+            if (birthdate === "") {
+                valid = false;
+                document.getElementById("birthdateError").textContent = "Date of Birth is required";
+            }
+            if (gender === null) {
+                valid = false;
+                document.getElementById("genderError").textContent = "Please select a gender";
+            }
+            if (age === "") {
+                valid = false;
+                document.getElementById("usernameError").textContent = "Age is required";
+            }
+            return valid;
+        }
+        function clearErrors() {
+            const errorElements = document.getElementsByClassName("error");
+            for (let i = 0; i < errorElements.length; i++) {
+                errorElements[i].textContent = "";
+            }
+        }
+        function isValidEmail(email) {
+            // Simple email validation using a regular expression
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html>
